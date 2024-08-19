@@ -9,6 +9,6 @@
         @vite('resources/css/app.css')
     </head>
     <body>
-        <h1 class="text-3xl font-extralight place-self-center">Jogja Trip Travel Will Comming!!!</h1>
+        <h1 class="text-3xl font-extralight place-self-center">Jogja Trip Travel Will Comming!!! Wait For It!</h1>
     </body>
 </html>
