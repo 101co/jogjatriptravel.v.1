@@ -11,7 +11,7 @@
     <body>
         <div class="container min-h-screen px-28 py-5 ">
             <nav class="flex items-center">
-                <img class="w-8 cursor-pointer" src="{{ url('storage/images/dummy-logo.png') }}" alt="logo">
+                <img class="w-8 cursor-pointer" src="{{ asset('/storage/images/dummy-logo.png') }}" alt="logo">
                 <ul class="flex-1 text-center">
                     <li class="list-none inline-block px-5"><a class="px-2" href="#">Home</a></li>
                     <li class="list-none inline-block px-5"><a class="px-2" href="#">About</a></li>
