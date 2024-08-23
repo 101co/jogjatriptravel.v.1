@@ -2,38 +2,36 @@
 
 namespace App\Filament\Resources\Master;
 
-use App\Models\User;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Models\Master\Contact;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\IconSize;
 use Filament\Support\Enums\MaxWidth;
+use Filament\Forms\Components\Toggle;
 use Filament\Support\Enums\ActionSize;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Actions\DeleteAction;
-use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\Master\UserResource\Pages;
-use Filament\Forms\Components\Toggle;
-use Filament\Tables\Columns\IconColumn;
+use App\Filament\Resources\Master\ContactResource\Pages;
 
-class UserResource extends Resource
+class ContactResource extends Resource
 {
-    protected static ?string $model = User::class;
+    protected static ?string $model = Contact::class;
 
     protected static ?string $navigationGroup = 'Master';
-    protected static ?string $navigationLabel = 'User';
-    protected static ?string $slug = 'user';
+    protected static ?string $navigationLabel = 'Contact';
+    protected static ?string $slug = 'contact';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 4;
 
     public static function canViewAny(): bool
     {
-        return authUserMenu('JTTAM001', auth()->user()->id);
+        return authUserMenu('JTTAM004', auth()->user()->id);
     }
 
     public static function form(Form $form): Form
@@ -41,28 +39,26 @@ class UserResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->required()
                     ->maxLength(100)
                     ->columnSpanFull(),
-                TextInput::make('username')
+                TextInput::make('alias')
+                    ->maxLength(50)
                     ->required()
                     ->unique(ignoreRecord: true)
-                    ->maxLength(100)
                     ->columnSpanFull(),
-                TextInput::make('email')
-                    ->email()
+                TextInput::make('phone')
+                    ->label('Phone Number')
+                    ->maxLength(15)
                     ->required()
-                    ->maxLength(100)
                     ->columnSpanFull(),
-                TextInput::make('password')
-                    ->required()
-                    ->password()
-                    ->revealable()
-                    ->maxLength(255)
-                    ->columnSpanFull(),
+                Toggle::make('is_contact_person')
+                    ->label('Contact Person')
+                    ->default(false)
+                    ->required(),
                 Toggle::make('is_active')
                     ->label('Active')
                     ->default(true)
+                    ->required(),
             ]);
     }
 
@@ -70,13 +66,18 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')
+                TextColumn::make('alias')
+                    ->label('Contact Alias')
                     ->searchable(),
-                TextColumn::make('username')
+                TextColumn::make('phone')
+                    ->label('Phone Number')
                     ->searchable(),
+                IconColumn::make('is_contact_person')
+                    ->label('Contact Person')
+                    ->boolean(),
                 IconColumn::make('is_active')
+                    ->label('active')
                     ->boolean()
-                    ->label('Active')
             ])
             ->filters([
                 //
@@ -86,15 +87,14 @@ class UserResource extends Resource
                     ->iconSize(IconSize::Small)
                     ->modalAutofocus(false)
                     ->size(ActionSize::ExtraSmall)
-                    ->modalHeading('Edit User')
+                    ->modalHeading('Edit Contact')
                     ->modalWidth(MaxWidth::Medium)
                     ->mutateFormDataUsing(function (array $data): array  
                     {
                         $data['updated_by'] = auth()->user()->username;
                         return $data;
                     }),
-                DeleteAction::make()
-                    ->iconSize(IconSize::Small),
+                DeleteAction::make(),
             ])
             ->bulkActions([
                 BulkActionGroup::make([
@@ -106,15 +106,7 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageUsers::route('/'),
+            'index' => Pages\ManageContacts::route('/'),
         ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
     }
 }

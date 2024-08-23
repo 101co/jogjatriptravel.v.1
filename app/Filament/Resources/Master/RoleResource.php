@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\Master;
 
-use App\Models\User;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Models\Master\Role;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\IconSize;
 use Filament\Support\Enums\MaxWidth;
@@ -13,56 +13,43 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Actions\DeleteAction;
-use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\Master\UserResource\Pages;
-use Filament\Forms\Components\Toggle;
-use Filament\Tables\Columns\IconColumn;
+use App\Filament\Resources\Master\RoleResource\Pages;
 
-class UserResource extends Resource
+class RoleResource extends Resource
 {
-    protected static ?string $model = User::class;
+    protected static ?string $model = Role::class;
 
     protected static ?string $navigationGroup = 'Master';
-    protected static ?string $navigationLabel = 'User';
-    protected static ?string $slug = 'user';
+    protected static ?string $navigationLabel = 'Role';
+    protected static ?string $slug = 'role';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 3;
 
     public static function canViewAny(): bool
     {
-        return authUserMenu('JTTAM001', auth()->user()->id);
+        return authUserMenu('JTTAM003', auth()->user()->id);
     }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->required()
-                    ->maxLength(100)
-                    ->columnSpanFull(),
-                TextInput::make('username')
+                TextInput::make('initial')
                     ->required()
                     ->unique(ignoreRecord: true)
+                    ->maxLength(10)
+                    ->columnSpanFull(),
+                TextInput::make('name')
+                    ->required()
+                    ->label('Role')
                     ->maxLength(100)
                     ->columnSpanFull(),
-                TextInput::make('email')
-                    ->email()
-                    ->required()
+                TextInput::make('description')
+                    ->label('Role Description')
                     ->maxLength(100)
-                    ->columnSpanFull(),
-                TextInput::make('password')
-                    ->required()
-                    ->password()
-                    ->revealable()
-                    ->maxLength(255)
-                    ->columnSpanFull(),
-                Toggle::make('is_active')
-                    ->label('Active')
-                    ->default(true)
+                    ->columnSpanFull()
             ]);
     }
 
@@ -70,13 +57,14 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('initial')
+                    ->searchable(),
                 TextColumn::make('name')
+                    ->label('Role')
                     ->searchable(),
-                TextColumn::make('username')
+                TextColumn::make('description')
+                    ->label('Role Description')
                     ->searchable(),
-                IconColumn::make('is_active')
-                    ->boolean()
-                    ->label('Active')
             ])
             ->filters([
                 //
@@ -93,8 +81,7 @@ class UserResource extends Resource
                         $data['updated_by'] = auth()->user()->username;
                         return $data;
                     }),
-                DeleteAction::make()
-                    ->iconSize(IconSize::Small),
+                DeleteAction::make(),
             ])
             ->bulkActions([
                 BulkActionGroup::make([
@@ -106,15 +93,7 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageUsers::route('/'),
+            'index' => Pages\ManageRoles::route('/'),
         ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
     }
 }

@@ -7,11 +7,8 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use App\Models\Master\Menu;
 use Filament\Resources\Resource;
-use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Validation\Rules\Unique;
 use Filament\Forms\Components\TextInput;
 use App\Filament\Resources\Master\MenuResource\Pages;
 
@@ -27,8 +24,7 @@ class MenuResource extends Resource
 
     public static function canViewAny(): bool
     {
-        $menuCode = 'JTTAM002';
-        return authUserMenu($menuCode, auth()->user()->id);
+        return authUserMenu('JTTAM002', auth()->user()->id);
     }
 
     public static function form(Form $form): Form
@@ -48,17 +44,7 @@ class MenuResource extends Resource
                     ]),                
                 TextInput::make('code')
                     ->required()
-                    ->unique(Menu::class, 'id', null, $ignoreRecord = true, $modifyRuleUsing = function (Unique $rule, string $context, ?Model $record) 
-                    {
-                        if ($record)
-                        {
-                            return $rule
-                                ->where('code', $record->code)
-                                ->whereNot('id', $record->id);
-                        }
-
-                        return null;
-                    })
+                    ->unique(ignoreRecord: true)
                     ->maxLength(10)
                     ->columnSpanFull(),
                 TextInput::make('name')
