@@ -15,7 +15,7 @@ class ManageRoles extends ManageRecords
     {
         return [
             CreateAction::make()
-                ->label('New')
+                ->label('Add')
                 ->modalAutofocus(false)
                 ->modalHeading('Create Role')
                 ->modalWidth(MaxWidth::Medium)

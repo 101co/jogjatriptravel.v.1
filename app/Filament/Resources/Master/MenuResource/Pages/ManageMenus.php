@@ -15,7 +15,7 @@ class ManageMenus extends ManageRecords
     {
         return [
             CreateAction::make()
-                ->label('New')
+                ->label('Add')
                 ->modalAutofocus(false)
                 ->modalHeading('Create Menu')
                 ->modalWidth(MaxWidth::Medium)

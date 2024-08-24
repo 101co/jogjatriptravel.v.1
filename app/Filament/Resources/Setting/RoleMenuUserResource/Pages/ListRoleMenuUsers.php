@@ -15,7 +15,7 @@ class ListRoleMenuUsers extends ListRecords
     {
         return [
             CreateAction::make()
-                ->label('New')
+                ->label('Add')
                 ->modalAutofocus(false)
                 ->modalHeading('Create Contact')
                 ->modalWidth(MaxWidth::Medium)

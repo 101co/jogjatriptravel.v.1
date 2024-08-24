@@ -19,7 +19,7 @@ class ManageUsers extends ManageRecords
     {
         return [
             CreateAction::make()
-                ->label('New')
+                ->label('Add')
                 ->modalAutofocus(false)
                 ->modalHeading('Create User')
                 ->modalWidth(MaxWidth::Medium)
