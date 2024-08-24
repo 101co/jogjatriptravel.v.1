@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\Master\FacilityResource\Pages;
 
-use App\Filament\Resources\Master\FacilityResource;
-use Filament\Actions;
+use Filament\Actions\CreateAction;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Resources\Pages\ManageRecords;
+use App\Filament\Resources\Master\FacilityResource;
 
 class ManageFacilities extends ManageRecords
 {
@@ -13,7 +14,17 @@ class ManageFacilities extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make()
+                ->label('Add')
+                ->modalAutofocus(false)
+                ->modalHeading('Create Facility')
+                ->modalWidth(MaxWidth::Medium)
+                ->mutateFormDataUsing(function (array $data): array 
+                {
+                    $data['created_by'] = auth()->user()->username;
+                    $data['updated_by'] = auth()->user()->username;
+                    return $data;
+                }),
         ];
     }
 }

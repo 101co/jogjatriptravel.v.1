@@ -6,15 +6,18 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use App\Models\Master\City;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\IconSize;
+use Filament\Support\Enums\MaxWidth;
+use Filament\Forms\Components\Toggle;
+use Filament\Support\Enums\ActionSize;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
 use App\Filament\Resources\Master\CityResource\Pages;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Toggle;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\TextColumn;
 
 class CityResource extends Resource
 {
@@ -60,7 +63,17 @@ class CityResource extends Resource
             ->filters([
             ])
             ->actions([
-                EditAction::make(),
+                EditAction::make()
+                    ->iconSize(IconSize::Small)
+                    ->modalAutofocus(false)
+                    ->size(ActionSize::ExtraSmall)
+                    ->modalHeading('Edit Contact')
+                    ->modalWidth(MaxWidth::Medium)
+                    ->mutateFormDataUsing(function (array $data): array  
+                    {
+                        $data['updated_by'] = auth()->user()->username;
+                        return $data;
+                    }),
                 DeleteAction::make(),
             ])
             ->bulkActions([
