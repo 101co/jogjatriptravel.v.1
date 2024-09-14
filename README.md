@@ -77,3 +77,6 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/101co/jogjatriptravel.v.1.git
 git push -u origin main
+
+## Membuat symlink dari cron job hosting
+ln -s /home/jogm7723/applications/jogjatriptravel/demo/storage/app/public /home/jogm7723/public_html/jogjatriptravel/demo/storage

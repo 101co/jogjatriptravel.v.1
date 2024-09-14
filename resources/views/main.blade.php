@@ -19,7 +19,7 @@
 <body class="antialiased">
     {{-- navbar --}}
     <nav>
-        <div class="fixed z-50 top-0 right-0 left-0 bg-slate-50 shadow-md">
+        {{-- <div class="fixed z-50 top-0 right-0 left-0 bg-slate-50 shadow-md">
             <div class="flex items-center justify-between py-4">
                 <div class="flex flex-col mx-auto">
                     <a href="#" class="ms-2 text-base font-bold"><img
@@ -51,10 +51,9 @@
                         </li>
                     </ul>
                 </div>
-                {{--
-            </div> --}}
-        </div>
-        <div class="fixed bottom-0 right-0 left-0 md:hidden z-50">
+            </div>
+        </div> --}}
+        {{-- <div class="fixed bottom-0 right-0 left-0 md:hidden z-50">
             <ul class="flex justify-between px-5 pt-3 pb-4 border-t-2 border-teal-100 bg-slate-50">
                 <li>
                     <a href="#"
@@ -85,12 +84,12 @@
                     </a>
                 </li>
             </ul>
-        </div>
+        </div> --}}
     </nav>
 
     {{-- hero --}}
     <section class="mt-10">
-        <div id="indicators-carousel" class="relative w-full" data-carousel="static">
+        <div id="indicators-carousel" class="relative w-full" data-carousel="static" data-carousel-touch="true">
             <!-- Carousel wrapper -->
             <div class="relative h-[344px] overflow-hidden md:h-96">
                 <!-- Item 1 -->
@@ -308,7 +307,7 @@
                 </div>
             </div>
             <div class="mx-auto mt-[35px]">
-                <a href="#"
+                <a href="/tourism-catalogue"
                     class="z-50 text-white bg-[#2E2E2E] text-sm font-semibold px-8 py-3 rounded-full focus:outline-none active:scale-95 transition-transform duration-150 ease-in-out">
                     Explore Now
                 </a>
@@ -439,7 +438,7 @@
             <li><a href=""><img src="{{ asset('/storage/images/icons/youtube.svg') }}" alt=""></a></li>
             <li><a href=""><img src="{{ asset('/storage/images/icons/twitter.svg') }}" alt=""></a></li>
         </ul>
-        <span class="flex text-center justify-center text-xs mt-4 opacity-65">Copyright &copy; {{ date('Y') }} Jogja Trip Travel Indonesia</span>
+        <span class="flex text-center justify-center text-xs mt-4 opacity-65">Copyright &copy; {{ date('Y') }},&nbsp;<a href="https://jogjatriptravel.com"> <span> Jogja Trip Travel </span> </a>,&nbsp;Indonesia</span>
     </div>
 
     {{-- start of button whatsapp --}}
