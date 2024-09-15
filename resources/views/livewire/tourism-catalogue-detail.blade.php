@@ -1,6 +1,6 @@
 <div>
     {{-- hero --}}
-    <section class="mt-10">
+    <section class="mt-10" aria-label="Travel Catalogue Hero">
         <div id="indicators-carousel" class="relative w-full" data-carousel="static" data-carousel-touch="true">
             <!-- Carousel wrapper -->
             <div class="relative h-[344px] overflow-hidden md:h-96">
@@ -63,122 +63,104 @@
     </section>
     
     {{-- detail--}}
-    <section class="px-5">
+    <section class="px-5" aria-label="Travel Detail">
         <div id="tourism-catalogue" class="flex flex-col mt-10">
-            <h1 class="text-start text-2xl w-4/5 font-bold">Yogyakarta City Tour</h1>
+            <h1 class="text-start text-2xl w-4/5 font-bold" aria-label="Catalogue Detail Title">Historical Trip</h1>
             <span class="text-sm font-light flex gap-1 items-center text-start w-4/5 mt-[10px]">
-                <ion-icon name="location-outline"></ion-icon><span>Yogyakarta</span>
+                <ion-icon name="time-outline"></ion-icon><span>One Day Trip</span>
             </span>
 
             <!-- facilities -->
-            <div class="grid grid-cols-2 gap-y-5 text-xs text-slate-600 mt-5">
-                <div class="flex items-center gap-1">
-                    <ion-icon name="bed"></ion-icon><span>Hotel</span>
+            <div class="grid grid-cols-2 gap-y-5 text-xs text-slate-600 mt-7" aria-label="Facilities">
+                <div class="flex items-center gap-2">
+                    <ion-icon name="car-outline"></ion-icon><span>Transport</span>
                 </div>
-                <div class="flex items-center gap-1">
-                    <ion-icon name="time"></ion-icon><span>2 days</span>
+                <div class="flex items-center gap-2">
+                    <ion-icon name="navigate-outline"></ion-icon><span>Drop & Pickup</span>
                 </div>
-                <div class="flex items-center gap-1">
-                    <ion-icon name="journal"></ion-icon><span>Include ticket</span>
+                <div class="flex items-center gap-2">
+                    <ion-icon name="people-outline"></ion-icon><span>Driver & Tour Guide</span>
                 </div>
-                <div class="flex items-center gap-1">
-                    <ion-icon name="bed"></ion-icon><span>Hotel</span>
+                <div class="flex items-center gap-2">
+                    <ion-icon name="cash-outline"></ion-icon><span>Retribution & Parking</span>
                 </div>
-                <div class="flex items-center gap-1">
-                    <ion-icon name="time"></ion-icon><span>2 days</span>
+                <div class="flex items-center gap-2">
+                    <ion-icon name="leaf-outline"></ion-icon><span>Fuel</span>
                 </div>
-                <div class="flex items-center gap-1">
-                    <ion-icon name="journal"></ion-icon><span>Include ticket</span>
+                <div class="flex items-center gap-2">
+                    <ion-icon name="camera-outline"></ion-icon><span>Photo</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <ion-icon name="ticket-outline"></ion-icon><span>Ticket</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <ion-icon name="fast-food-outline"></ion-icon><span>Mineral Water</span>
                 </div>
             </div>
 
-            <!-- itenerary -->
-            <div class="mt-9">
-                <h1 class="text-start text-base w-4/5 font-bold">Itenerary</h1>
-                <div class="justify-center mt-4 pb-2">
-                    <div id="accordion-collapse" data-accordion="collapse">
-                        <h2 id="accordion-collapse-heading-1">
-                            <button type="button"
-                                class="flex items-center justify-between w-full p-5 font-normal text-xs rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
-                                data-accordion-target="#accordion-collapse-body-1" aria-expanded="true"
-                                aria-controls="accordion-collapse-body-1">
-                                <span>Hari 1 - Penjemputan di bandara</span>
-                                <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="M9 5 5 1 1 5" />
-                                </svg>
-                            </button>
-                        </h2>
-                        <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
-                            <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                                <p class="mb-2 text-gray-500 dark:text-gray-400 font-light text-xs">Jogja Trip Travel is a tourism service bureau domiciled in the city of Yogyakarta. Providing various tour packages that local and foreign tourists can choose from.</p>
+            <!-- package -->
+            <div class="mt-12">
+                <h1 class="text-start text-xl w-full font-bold">Package</h1>
+                <div class="flex flex-col justify-center mt-8 pb-2 gap-y-8">
+                    <div class="bg-slate-200 w-full rounded-2xl overflow-hidden" aria-label="Paket 1">
+                        <div class="bg-slate-100 p-5 rounded-2xl flex justify-between">
+                            <h2 class="text-xl font-bold">Paket 1</h2>
+                            <div class="flex items-center gap-5">
+                                <div class="flex -space-x-4 rtl:space-x-reverse">
+                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('/storage/images/hero/jogja-5.jpg')}}" alt="">
+                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('/storage/images/hero/jogja-6.jpg')}}" alt="">
+                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('/storage/images/hero/jogja-7.jpg')}}" alt="">
+                                    <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">+5</a>
+                                </div>
+                                <input id="checkbox" type="checkbox" value="" class="w-6 h-6 cursor-pointer rounded-full bg-gray-100 border-gray-500 focus:ring-gray-800 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             </div>
                         </div>
-                        <h2 id="accordion-collapse-heading-2">
-                            <button type="button"
-                                class="flex items-center justify-between w-full p-5 font-normal text-xs rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
-                                data-accordion-target="#accordion-collapse-body-2" aria-expanded="true"
-                                aria-controls="accordion-collapse-body-1">
-                                <span>Hari 2 - Pengantaran ke bandara</span>
-                                <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="M9 5 5 1 1 5" />
-                                </svg>
-                            </button>
-                        </h2>
-                        <div id="accordion-collapse-body-2" class="hidden" aria-labelledby="accordion-collapse-heading-2">
-                            <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                                <p class="mb-2 text-gray-500 dark:text-gray-400 font-light text-xs">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem at perspiciatis in eligendi. Nam soluta veritatis accusantium rerum adipisci, inventore nostrum distinctio cupiditate laborum? Excepturi quibusdam magni quaerat minus placeat..</p>
+                        <div class="p-5">
+                            <ul class="text-base font-light list-disc px-5">
+                                <li>Tamansari</li>
+                                <li>Kraton Yogyakarta</li>
+                                <li>Studio Alam Gamplong</li>
+                                <li>Pronosutan View</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="bg-slate-200 w-full rounded-2xl overflow-hidden" aria-label="Paket 2">
+                        <div class="bg-slate-100 p-5 rounded-2xl flex justify-between">
+                            <h2 class="text-xl font-bold">Paket 2</h2>
+                            <div class="flex items-center gap-5">
+                                <div class="flex -space-x-4 rtl:space-x-reverse">
+                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('/storage/images/hero/jogja-5.jpg')}}" alt="">
+                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('/storage/images/hero/jogja-6.jpg')}}" alt="">
+                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('/storage/images/hero/jogja-7.jpg')}}" alt="">
+                                    <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">+5</a>
+                                </div>
+                                <input id="checkbox" type="checkbox" value="" class="w-6 h-6 cursor-pointer rounded-full bg-gray-100 border-gray-500 focus:ring-gray-800 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             </div>
                         </div>
-                        <h2 id="accordion-collapse-heading-3">
-                            <button type="button"
-                                class="flex items-center justify-between w-full p-5 font-normal text-xs rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
-                                data-accordion-target="#accordion-collapse-body-3" aria-expanded="false"
-                                aria-controls="accordion-collapse-body-3">
-                                <span class="text-start">Hari 3 - Pengantaran</span>
-                                <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="M9 5 5 1 1 5" />
-                                </svg>
-                            </button>
-                        </h2>
-                        <div id="accordion-collapse-body-3" class="hidden" aria-labelledby="accordion-collapse-heading-3">
-                            <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                                <p class="mb-2 text-gray-500 dark:text-gray-400 font-light text-xs">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et, rerum alias velit minima tempora nostrum similique esse facilis explicabo provident ut exercitationem enim consectetur necessitatibus totam nulla quibusdam quam quasi!</p>
-                            </div>
+                        <div class="p-5">
+                            <ul class="text-base font-light list-disc px-5">
+                                <li>Tamansari</li>
+                                <li>Kraton Yogyakarta</li>
+                                <li>Candi Borobudur</li>
+                                <li>Svargabumi / Obelix Village</li>
+                                <li>VW Borobudur (Optional)</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- syarat & ketentuan -->
-            <div class="mt-9">
-                <h1 class="text-start text-base w-4/5 font-bold">Terms & conditions</h1>
-                <div class="justify-center mt-4 pb-2">
-                    <div id="accordion-collapse-2" data-accordion="collapse">
-                        <h2 id="accordion-collapse-terms-condition-1">
-                            <button type="button"
-                                class="flex items-center justify-between w-full p-5 font-normal text-xs rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
-                                data-accordion-target="#accordion-collapse-terms-condition" aria-expanded="true"
-                                aria-controls="accordion-collapse-terms-condition">
-                                <span>Terms & conditions</span>
-                                <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="M9 5 5 1 1 5" />
-                                </svg>
-                            </button>
-                        </h2>
-                        <div id="accordion-collapse-terms-condition" class="hidden" aria-labelledby="accordion-collapse-heading-1">
-                            <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                                <p class="mb-2 text-gray-500 dark:text-gray-400 font-light text-xs">Jogja Trip Travel is a tourism service bureau domiciled in the city of Yogyakarta. Providing various tour packages that local and foreign tourists can choose from.</p>
-                            </div>
-                        </div>
-                    </div>
+            <!-- additional information -->
+            <div class="mt-12">
+                <h1 class="text-start text-xl w-full font-bold">Additional Information</h1>
+                <div class="flex flex-col justify-center mt-8 bg-slate-100 w-full p-5">
+                    <h2 class="font-medium">Fasilitas tidak termasuk</h2>
+                    <ul class="text-base font-light list-disc px-5">
+                        <li>Sewa jeep / vw</li>
+                        <li>Makan & keperluan pribadi</li>
+                        <li>Spot foto berbayar (jika ada)</li>
+                        <li>Tips driver / guide sukarela</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -186,9 +168,49 @@
 
     <!-- order -->
     <div class="mt-4 bg-slate-800 p-8 flex translate-y-12">
-        <a href="/tourism-catalogue"
+        {{-- <a href="/tourism-catalogue"
             class="mx-auto z-50 text-slate-800 bg-slate-100 text-sm font-semibold px-8 py-3 rounded-full focus:outline-none active:scale-95 transition-transform duration-150 ease-in-out">
             Order
-        </a>
+        </a> --}}
+        <button type="button" class="mx-auto inline-flex items-center px-5 py-2.5 text-sm font-bold text-center text-slate-800 bg-slate-100 rounded-full hover:bg-slate-300 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Order
+            <span class="inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-semibold text-slate-100 bg-slate-800 rounded-full">
+            2
+            </span>
+        </button>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const carouselElement = document.getElementById('indicators-carousel');
+      let startX = 0;
+      let endX = 0;
+  
+      // Detect when the user starts touching the screen
+      carouselElement.addEventListener('touchstart', function (e) {
+        startX = e.touches[0].clientX;
+      });
+  
+      // Detect when the user moves their finger
+      carouselElement.addEventListener('touchmove', function (e) {
+        endX = e.touches[0].clientX;
+      });
+  
+      // Detect when the user lifts their finger
+      carouselElement.addEventListener('touchend', function () {
+        const diffX = startX - endX;
+  
+        // If swipe is significant, navigate the carousel
+        if (Math.abs(diffX) > 50) {
+          if (diffX > 0) {
+            // Swipe left, show the next slide
+            document.querySelector('[data-carousel-next]').click();
+          } else {
+            // Swipe right, show the previous slide
+            document.querySelector('[data-carousel-prev]').click();
+          }
+        }
+      });
+    });
+</script>

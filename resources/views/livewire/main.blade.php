@@ -94,7 +94,7 @@
         <div class="flex flex-col lg:grid lg:grid-cols-3 lg:items-stretch lg:justify-start lg:place-items-stretch mt-10 lg:mt-[50px] px-5 lg:px-20 gap-y-[20px] lg:gap-x-5 justify-between items-center">
             {{-- item 1 --}}
             <div class="relative h-[100px] lg:h-[200px] w-full md:w-[620px] lg:w-auto overflow-hidden rounded-2xl cursor-pointer hover:scale-105 active:scale-105 duration-300">
-                <a href="#" data-carousel-item="active">
+                <a href="/travel-catalogue-detail" data-carousel-item="active">
                     <img src="{{ asset('/storage/images/hero/jogja-6.jpg')}}"
                         class="absolute block h-full object-cover w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                         alt="...">

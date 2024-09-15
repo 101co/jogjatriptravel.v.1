@@ -14,34 +14,34 @@
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         @vite(['resources/css/app.css','resources/js/app.js'])
     </head>
-    <body>
+    <body>    
         {{-- header --}}
-        <navbar class="fixed flex items-center justify-between px-5 lg:px-[75px] py-5 z-50 top-0 right-0 left-0 bg-slate-50 shadow-md">
+        <header class="fixed flex items-center justify-between px-5 lg:px-[75px] py-5 z-50 top-0 right-0 left-0 bg-slate-50 shadow-md">
             <div class="mx-auto md:mx-0" aria-label="logo jogjatriptravel">
-                <a href="/" class="text-base font-bold"><img src="{{ asset('/storage/images/logo/jogjatriptravel-1.svg') }}" alt="jogjatriptravel"></a>
+                <a href="{{ Request::path() == '/' ? '/' : '/' }}" class="text-base font-bold"><img src="{{ asset('/storage/images/logo/jogjatriptravel-1.svg') }}" alt="jogjatriptravel"></a>
             </div>
             <div class="hidden md:block">
                 <ul class="flex justify-between gap-4">
                     <li>
-                        <a href="#" aria-label="Home"
+                        <a href="{{ Request::path() == '/' ? '#' : '/' }}" aria-label="Home"
                             class="font-light text-base hover:bg-slate-100 px-3 py-2 rounded-full duration-1000 ease-in-out">Home</a>
                     </li>
                     <li>
-                        <a href="#travel-catalogue" aria-label="Travel Catalogue"
+                        <a href="{{ Request::path() == '/' ? '#travel-catalogue' : '/#travel-catalogue' }}" aria-label="Travel Catalogue"
                             class="font-light text-base hover:bg-slate-100 px-3 py-2 rounded-full duration-1000 ease-in-out">Catalogue
                             Wisata</a>
                     </li>
                     <li>
-                        <a href="#contact" aria-label="Contact Us"
+                        <a href="{{ Request::path() == '/' ? '#contact' : '/#contact' }}" aria-label="Contact Us"
                             class="font-light text-base hover:bg-slate-100 px-3 py-2 rounded-full duration-1000 ease-in-out">Contact</a>
                     </li>
                     <li>
-                        <a href="#faq" aria-label="Frequently Asked Question"
+                        <a href="{{ Request::path() == '/' ? '#faq' : '/#faq' }}" aria-label="Frequently Asked Question"
                             class="font-light text-base hover:bg-slate-100 px-3 py-2 rounded-full duration-1000 ease-in-out">FAQ</a>
                     </li>
                 </ul>
             </div>
-        </navbar>
+        </header>
 
         {{ $slot }}
         
@@ -60,28 +60,28 @@
         <nav class="fixed bottom-0 right-0 left-0 md:hidden shadow-2xl shadow-black" aria-label="bottom navigation">
             <ul class="flex justify-between px-7 pt-3 pb-4 border-t-2 border-teal-100 bg-slate-50">
                 <li>
-                    <a href="#"
+                    <a href="{{ Request::path() == '/' ? '#' : '/' }}"
                         class="flex justify-center flex-col items-center gap-1 text-slate-400 hover:text-slate-800 duration-700">
                         <ion-icon name="home" class="text-lg mb-1"></ion-icon>
                         <span class="text-xs font-normal">Home</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#travel-catalogue"
+                    <a href="{{ Request::path() == '/' ? '#travel-catalogue' : '/#travel-catalogue' }}"
                         class="flex justify-center flex-col items-center gap-1 text-slate-400 hover:text-slate-800 duration-700">
                         <ion-icon name="map" class="text-lg mb-1"></ion-icon>
                         <span class="text-xs font-normal">Catalogue</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#contact"
+                    <a href="{{ Request::path() == '/' ? '#contact' : '/#contact' }}"
                         class="flex justify-center flex-col items-center gap-1 text-slate-400 hover:text-slate-800 duration-700">
                         <ion-icon name="call" class="text-lg mb-1"></ion-icon>
                         <span class="text-xs font-normal">Contact</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#faq"
+                    <a href="{{ Request::path() == '/' ? '#faq' : '/#faq' }}"
                         class="flex justify-center flex-col items-center gap-1 text-slate-400 hover:text-slate-800 duration-700">
                         <ion-icon name="help-circle-outline" class="text-lg mb-1"></ion-icon>
                         <span class="text-xs font-normal">FAQ's</span>
