@@ -4,33 +4,21 @@
         <div id="indicators-carousel" class="relative w-full" data-carousel="static" data-carousel-touch="true">
             <!-- Carousel wrapper -->
             <div class="relative h-[344px] overflow-hidden md:h-96">
-                <!-- Item 1 -->
+                @foreach ($coverImages as $item)
                 <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                    <img src="{{ asset('/storage/images/hero/jogja-5.jpg')}}"
+                    <img src="{{ asset('/storage/'.$item)}}"
                         class="absolute block h-full object-cover w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                         alt="...">
                 </div>
-                <!-- Item 2 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                    <img src="{{ asset('/storage/images/hero/jogja-6.jpg')}}"
-                        class="absolute block h-full object-cover w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                        alt="...">
-                </div>
-                <!-- Item 2 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                    <img src="{{ asset('/storage/images/hero/jogja-7.jpg')}}"
-                        class="absolute block h-full object-cover w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                        alt="...">
-                </div>
+                @endforeach
             </div>
             <!-- Slider indicators -->
             <div class="absolute z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse bottom-5 left-1/2">
+                @foreach ($coverImages as $item)
                 <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1"
-                    data-carousel-slide-to="0"></button>
-                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2"
-                    data-carousel-slide-to="1"></button>
-                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3"
-                    data-carousel-slide-to="2"></button>
+                    data-carousel-slide-to="0">
+                </button>
+                @endforeach
             </div>
             <!-- Slider controls -->
             <button type="button"
@@ -65,46 +53,28 @@
     {{-- detail--}}
     <section class="px-5" aria-label="Travel Detail">
         <div id="tourism-catalogue" class="flex flex-col mt-10">
-            <h1 class="text-start text-2xl w-4/5 font-bold" aria-label="Catalogue Detail Title">Historical Trip</h1>
+            <h1 class="text-start text-2xl w-4/5 font-bold" aria-label="Catalogue Detail Title">{{ $data->title }}</h1>
             <span class="text-sm font-light flex gap-1 items-center text-start w-4/5 mt-[10px]">
-                <ion-icon name="time-outline"></ion-icon><span>One Day Trip</span>
+                <ion-icon name="time-outline"></ion-icon><span>{{ $data->sub_title }}</span>
             </span>
 
             <!-- facilities -->
             <div class="grid grid-cols-2 gap-y-5 text-xs text-slate-600 mt-7" aria-label="Facilities">
+                @foreach ($facilities as $item)
                 <div class="flex items-center gap-2">
-                    <ion-icon name="car-outline"></ion-icon><span>Transport</span>
+                    <ion-icon name="{{ $item->icon_name }}"></ion-icon><span>{{ $item->name }}</span>
                 </div>
-                <div class="flex items-center gap-2">
-                    <ion-icon name="navigate-outline"></ion-icon><span>Drop & Pickup</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <ion-icon name="people-outline"></ion-icon><span>Driver & Tour Guide</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <ion-icon name="cash-outline"></ion-icon><span>Retribution & Parking</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <ion-icon name="leaf-outline"></ion-icon><span>Fuel</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <ion-icon name="camera-outline"></ion-icon><span>Photo</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <ion-icon name="ticket-outline"></ion-icon><span>Ticket</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <ion-icon name="fast-food-outline"></ion-icon><span>Mineral Water</span>
-                </div>
+                @endforeach
             </div>
 
             <!-- package -->
             <div class="mt-12">
                 <h1 class="text-start text-xl w-full font-bold">Package</h1>
                 <div class="flex flex-col justify-center mt-8 pb-2 gap-y-8">
+                    @foreach ($packages as $item)
                     <div class="bg-slate-200 w-full rounded-2xl overflow-hidden" aria-label="Paket 1">
                         <div class="bg-slate-100 p-5 rounded-2xl flex justify-between">
-                            <h2 class="text-xl font-bold">Paket 1</h2>
+                            <h2 class="text-xl font-bold">{{ $item['title'] }}</h2>
                             <div class="flex items-center gap-5">
                                 <div class="flex -space-x-4 rtl:space-x-reverse">
                                     <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('/storage/images/hero/jogja-5.jpg')}}" alt="">
@@ -112,41 +82,18 @@
                                     <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('/storage/images/hero/jogja-7.jpg')}}" alt="">
                                     <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">+5</a>
                                 </div>
-                                <input id="checkbox" type="checkbox" value="" class="w-6 h-6 cursor-pointer rounded-full bg-gray-100 border-gray-500 focus:ring-gray-800 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <input id="checkbox" type="checkbox" value="{{ $item['title'] }}" wire:click="selectPaket('{{ $item['title'] }}')" class="w-6 h-6 cursor-pointer rounded-full bg-gray-100 border-gray-500 focus:ring-gray-800 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             </div>
                         </div>
                         <div class="p-5">
                             <ul class="text-base font-light list-disc px-5">
-                                <li>Tamansari</li>
-                                <li>Kraton Yogyakarta</li>
-                                <li>Studio Alam Gamplong</li>
-                                <li>Pronosutan View</li>
+                                @foreach ($item['destinations'] as $destination)
+                                <li>{{ $this->getDestinationById($destination)->name }}</li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
-                    <div class="bg-slate-200 w-full rounded-2xl overflow-hidden" aria-label="Paket 2">
-                        <div class="bg-slate-100 p-5 rounded-2xl flex justify-between">
-                            <h2 class="text-xl font-bold">Paket 2</h2>
-                            <div class="flex items-center gap-5">
-                                <div class="flex -space-x-4 rtl:space-x-reverse">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('/storage/images/hero/jogja-5.jpg')}}" alt="">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('/storage/images/hero/jogja-6.jpg')}}" alt="">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('/storage/images/hero/jogja-7.jpg')}}" alt="">
-                                    <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">+5</a>
-                                </div>
-                                <input id="checkbox" type="checkbox" value="" class="w-6 h-6 cursor-pointer rounded-full bg-gray-100 border-gray-500 focus:ring-gray-800 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            </div>
-                        </div>
-                        <div class="p-5">
-                            <ul class="text-base font-light list-disc px-5">
-                                <li>Tamansari</li>
-                                <li>Kraton Yogyakarta</li>
-                                <li>Candi Borobudur</li>
-                                <li>Svargabumi / Obelix Village</li>
-                                <li>VW Borobudur (Optional)</li>
-                            </ul>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 

@@ -3,6 +3,7 @@
 namespace App\Models\Transaction;
 
 use App\Models\Master\Contact;
+use App\Models\Master\Destination;
 use App\Models\Master\Facility;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,6 +28,7 @@ class TravelCatalogue extends Model
         'contact_person',
         'term_condition',
         'packages',
+        'is_active',
         'created_by',
         'updated_by'
     ];
@@ -34,6 +36,11 @@ class TravelCatalogue extends Model
     public function facilities() 
     {
         return $this->hasMany(Facility::class);   
+    }
+
+    public function destinations() 
+    {
+        return $this->hasMany(Destination::class);   
     }
 
     public function contactPerson() 

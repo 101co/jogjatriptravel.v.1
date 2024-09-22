@@ -5,13 +5,17 @@ namespace App\Models\Master;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Facility extends Model
+class Destination extends Model
 {
     use HasFactory;
 
-    public $fillable = [
+    protected $casts = [
+        'images' => 'array',
+    ];
+
+    protected $fillable = [
         'name',
-        'icon_name',
+        'images',
         'is_active',
         'created_by',
         'updated_by'

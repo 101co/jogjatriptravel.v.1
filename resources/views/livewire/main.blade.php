@@ -92,83 +92,18 @@
         <span class="text-base lg:text-xl font-light mx-auto text-center w-4/5 mt-[15px] lg:mt-[30px]">Start your journey and enjoy an
             unforgettable experience</span>
         <div class="flex flex-col lg:grid lg:grid-cols-3 lg:items-stretch lg:justify-start lg:place-items-stretch mt-10 lg:mt-[50px] px-5 lg:px-20 gap-y-[20px] lg:gap-x-5 justify-between items-center">
-            {{-- item 1 --}}
+            @foreach ($this->getActiveTravelCatalogue() as $item)
             <div class="relative h-[100px] lg:h-[200px] w-full md:w-[620px] lg:w-auto overflow-hidden rounded-2xl cursor-pointer hover:scale-105 active:scale-105 duration-300">
-                <a href="/travel-catalogue-detail" data-carousel-item="active">
-                    <img src="{{ asset('/storage/images/hero/jogja-6.jpg')}}"
+                <a href="{{ $item->slug }}" data-carousel-item="active">
+                    <img src="{{ asset('/storage/'.$item->cover_images[0])}}"
                         class="absolute block h-full object-cover w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                         alt="...">
                     <div class="absolute inset-0 bg-black bg-opacity-50 px-5 flex flex-col items-center justify-center">
-                        <h1 class="mx-auto text-center text-slate-100 text-xl lg:text-[26px] font-bold">Historical Trip</h1>
+                        <h1 class="mx-auto text-center text-slate-100 text-xl lg:text-[26px] font-bold">{{ $item->title }}</h1>
                     </div>
                 </a>
             </div>
-            {{-- item 2 --}}
-            <div class="relative h-[100px] lg:h-[200px] w-full md:w-[620px] lg:w-auto overflow-hidden rounded-2xl cursor-pointer hover:scale-105 active:scale-105 duration-300">
-                <a href="#" data-carousel-item="active">
-                    <img src="{{ asset('/storage/images/hero/jogja-9.jpg')}}"
-                        class="absolute block h-full object-cover w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                        alt="...">
-                    <div class="absolute inset-0 bg-black bg-opacity-50 px-5 flex flex-col items-center justify-center">
-                        <h1 class="mx-auto text-center text-slate-100 text-xl lg:text-[26px] font-bold">Oceanic Trip</h1>
-                    </div>
-                </a>
-            </div>
-            {{-- item 3 --}}
-            <div class="relative h-[100px] lg:h-[200px] w-full md:w-[620px] lg:w-auto overflow-hidden rounded-2xl cursor-pointer hover:scale-105 active:scale-105 duration-300">
-                <a href="#" data-carousel-item="active">
-                    <img src="{{ asset('/storage/images/hero/jogja-7.jpg')}}"
-                        class="absolute block h-full object-cover w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                        alt="...">
-                    <div class="absolute inset-0 bg-black bg-opacity-50 px-5 flex flex-col items-center justify-center">
-                        <h1 class="mx-auto text-center text-slate-100 text-xl lg:text-[26px] font-bold">Sunrise Hunter</h1>
-                    </div>
-                </a>
-            </div>
-            {{-- item 4 --}}
-            <div class="relative h-[100px] lg:h-[200px] w-full md:w-[620px] lg:w-auto overflow-hidden rounded-2xl cursor-pointer hover:scale-105 active:scale-105 duration-300">
-                <a href="#" data-carousel-item="active">
-                    <img src="{{ asset('/storage/images/hero/jogja-5.jpg')}}"
-                        class="absolute block h-full object-cover w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                        alt="...">
-                    <div class="absolute inset-0 bg-black bg-opacity-50 px-5 flex flex-col items-center justify-center">
-                        <h1 class="mx-auto text-center text-slate-100 text-xl lg:text-[26px] font-bold">Temple Trip</h1>
-                    </div>
-                </a>
-            </div>
-            {{-- item 5 --}}
-            <div class="relative h-[100px] lg:h-[200px] w-full md:w-[620px] lg:w-auto overflow-hidden rounded-2xl cursor-pointer hover:scale-105 active:scale-105 duration-300">
-                <a href="#" data-carousel-item="active">
-                    <img src="{{ asset('/storage/images/hero/jogja-8.jpg')}}"
-                        class="absolute block h-full object-cover w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                        alt="...">
-                    <div class="absolute inset-0 bg-black bg-opacity-50 px-5 flex flex-col items-center justify-center">
-                        <h1 class="mx-auto text-center text-slate-100 text-xl lg:text-[26px] font-bold">Cave & Beach</h1>
-                    </div>
-                </a>
-            </div>
-            {{-- item 6 --}}
-            <div class="relative h-[100px] lg:h-[200px] w-full md:w-[620px] lg:w-auto overflow-hidden rounded-2xl cursor-pointer hover:scale-105 active:scale-105 duration-300">
-                <a href="#" data-carousel-item="active">
-                    <img src="{{ asset('/storage/images/hero/jogja-4.jpg')}}"
-                        class="absolute block h-full object-cover w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                        alt="...">
-                    <div class="absolute inset-0 bg-black bg-opacity-50 px-5 flex flex-col items-center justify-center">
-                        <h1 class="mx-auto text-center text-slate-100 text-xl lg:text-[26px] font-bold">Lava Tour</h1>
-                    </div>
-                </a>
-            </div>
-            {{-- item 7 --}}
-            <div class="relative h-[100px] lg:h-[200px] w-full md:w-[620px] lg:w-auto overflow-hidden rounded-2xl cursor-pointer hover:scale-105 active:scale-105 duration-300">
-                <a href="#" data-carousel-item="active">
-                    <img src="{{ asset('/storage/images/hero/jogja-1.jpg')}}"
-                        class="absolute block h-full object-cover w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                        alt="...">
-                    <div class="absolute inset-0 bg-black bg-opacity-50 px-5 flex flex-col items-center justify-center">
-                        <h1 class="mx-auto text-center text-slate-100 text-xl lg:text-[26px] font-bold">Instagenic Picnic</h1>
-                    </div>
-                </a>
-            </div>
+            @endforeach
         </div>
     </section>
 

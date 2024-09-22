@@ -3,12 +3,23 @@
 use App\Livewire\Main;
 use App\Livewire\TourismCatalogue;
 use App\Livewire\TourismCatalogueDetail;
+use App\Models\Transaction\TravelCatalogue;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', Main::class);
-Route::get('/travel-catalogue', TourismCatalogue::class);
-Route::get('/travel-catalogue-detail', TourismCatalogueDetail::class);
+// Route::get('/travel-catalogue', TourismCatalogue::class);
+// Route::get('/travel-catalogue-detail', TourismCatalogueDetail::class);
+
+
+Route::get('/{slug}', TourismCatalogueDetail::class);
+// Route::get('/{slug}', function () {
+//     // dd('workz**'.request()->segment('1'));
+//     $data = TravelCatalogue::where('slug', '=',request()->segment('1'))->first();
+//     // dd($data);
+//     // $data = Invitation::where('slug', '=', request()->segment('1'))->first();
+//     return view('viewer.example', ['data' => $data]);
+// });
 
 
 Route::get('/symlink', function () {

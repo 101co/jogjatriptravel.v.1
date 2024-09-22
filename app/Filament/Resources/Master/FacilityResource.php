@@ -42,6 +42,10 @@ class FacilityResource extends Resource
                     ->unique(ignoreRecord: true)
                     ->maxLength(100)
                     ->columnSpanFull(),
+                TextInput::make('icon_name')
+                    ->required()
+                    ->maxLength(100)
+                    ->columnSpanFull(),
                 Toggle::make('is_active')
                     ->default(true)
                     ->label('Active')

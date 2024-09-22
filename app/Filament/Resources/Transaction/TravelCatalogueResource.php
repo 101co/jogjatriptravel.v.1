@@ -9,6 +9,7 @@ use App\Models\Master\Contact;
 use App\Models\Master\Facility;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Actions\EditAction;
@@ -18,9 +19,11 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Columns\Layout\Stack;
 use App\Models\Transaction\TravelCatalogue;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
 use App\Filament\Resources\Transaction\TravelCatalogueResource\Pages;
+use App\Models\Master\Destination;
 
 class TravelCatalogueResource extends Resource
 {
@@ -64,21 +67,20 @@ class TravelCatalogueResource extends Resource
                     ->preload()
                     ->multiple(),
                 Repeater::make('packages')
+                    ->label('Paket Wisata')
                     ->schema([
                         TextInput::make('title')
                             ->label('Judul'),
-                        Repeater::make('destinations')
-                            ->schema([
-                                TextInput::make('title')
-                                    ->label('Judul'),
-                                FileUpload::make('images')
-                                    ->multiple()
-                                    ->minFiles(1)
-                                    ->maxFiles(3)
-                                    ->reorderable()
-                                    ->panelLayout('grid')
-                            ])
-                    ]),
+                        CheckboxList::make('destinations')
+                            ->options(Destination::where('is_active', '=', true)->get()->pluck('name', 'id'))
+                            ->searchable()
+                            ->columns(2)
+                    ])
+                    ->addActionLabel('Tambah Paket')
+                    ->collapsible()
+                    ->collapsed(true)
+                    ->itemLabel(fn (array $state): ?string => $state['title'] ?? null)
+                    ->reorderable(),
                 Textarea::make('term_condition')
                     ->label('Informasi Tambahan')
                     ->rows(4)
@@ -87,7 +89,9 @@ class TravelCatalogueResource extends Resource
                     ->label('Kontak')
                     ->options(Contact::where('is_active', '=', true)->get()->pluck('alias', 'id'))
                     ->preload()
-                    ->multiple()
+                    ->multiple(),
+                Toggle::make('is_active')
+                    ->default(true)
             ]);
     }
 
