@@ -15,6 +15,10 @@ class TourismCatalogueDetail extends Component
     public $packages;
     public $selectedPaket = [];
 
+    public $destinationImages = [];
+    public $destinationCategories = [];
+    public $isOpen = false;
+
     public function mount($slug)
     {
         // dd('workz**'.$slug);
@@ -30,11 +34,59 @@ class TourismCatalogueDetail extends Component
         return $destination;
     }
 
-    public function selectPaket($title)
+    public function getDestinationMergeLimit($ids) 
     {
-        // dd('pressed'.$title);
-        // array_push($this->selectedPaket, $title);
-        // dd($this->selectedPaket);
+        $destinations = Destination::whereIn('id', $ids)->pluck('images')->toArray();
+        $combined = array_merge(...array_map('array_values', $destinations));
+        $limited = array_slice($combined, 0, 3);
+        return $limited;
+    }
+
+    public function getDestinationMerge($ids) 
+    {
+        $destinations = Destination::whereIn('id', $ids)->pluck('images')->toArray();
+        $combined = array_merge(...array_map('array_values', $destinations));
+        return $combined;
+    }
+
+    public function showDestinationImages($ids) 
+    {
+        // $this->isOpen = true;
+        $destinations = Destination::whereIn('id', $ids)->get(['name', 'images'])->toArray();
+        $this->destinationImages = [];
+        foreach ($destinations as $destination) {
+            foreach ($destination['images'] as $image) {
+                $this->destinationImages[] = [
+                    'name' => $destination['name'],
+                    'category' => strtolower(str_replace(' ', '-', $destination['name'])),
+                    'image' => $image,
+                ];
+            }
+        }
+
+        $this->destinationCategories = array_unique(array_column($this->destinationImages, 'name'));
+        $this->dispatch('showGaleryModal');
+    }
+
+    public function closeModal()
+    {
+        $this->isOpen = false;
+    }
+
+    public function sendWhatsapp()
+    {
+        if (empty($this->selectedPaket)) 
+        {
+            $this->dispatch('show-swal', title: 'Paket belum dipilih', text: 'Pilih paket terlebih dahulu', icon: 'warning');
+        }
+        else 
+        {
+            $message = urlencode("Halo mimin Jogja Trip Travel, saya mau info lebih lanjut tentang paket ini:\n" 
+                    ."\n*".$this->data->title."*\n"
+                    .implode("\n", $this->selectedPaket)
+                    ."\n\nTerima kasih mimin.");
+            $this->dispatch('open-link-tab', url: "https://wa.me/62859106849531?text=$message");
+        }
     }
 
     public function render()

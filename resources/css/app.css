@@ -7,4 +7,26 @@
     font-family: "Poppins", sans-serif ;
     scroll-behavior: smooth;
   }
+
+  .scrollbar-simple {
+      scrollbar-width: thin; /* Untuk Firefox */
+      scrollbar-color: transparent transparent; /* Warna thumb dan track untuk Firefox */
+  }
+
+  .scrollbar-simple::-webkit-scrollbar {
+      width: 8px; /* Lebar scrollbar */
+  }
+
+  .scrollbar-simple::-webkit-scrollbar-track {
+      background: transparent; /* Track transparan */
+  }
+
+  .scrollbar-simple::-webkit-scrollbar-thumb {
+      background-color: rgba(99, 102, 241, 0.7); /* Warna thumb */
+      border-radius: 10px; /* Membuat thumb lebih melengkung */
+  }
+
+  .scrollbar-simple::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(99, 102, 241, 1); /* Warna thumb saat hover */
+  }
 }

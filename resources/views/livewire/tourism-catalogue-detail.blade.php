@@ -1,11 +1,11 @@
 <div>
     {{-- hero --}}
-    <section class="mt-10" aria-label="Travel Catalogue Hero">
+    <section class="mt-10" aria-label="Travel Catalogue Hero" wire:ignore>
         <div id="indicators-carousel" class="relative w-full" data-carousel="static" data-carousel-touch="true">
             <!-- Carousel wrapper -->
             <div class="relative h-[344px] overflow-hidden md:h-96">
                 @foreach ($coverImages as $item)
-                <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+                <div class="hidden duration-700 ease-in-out" data-carousel-item="">
                     <img src="{{ asset('/storage/'.$item)}}"
                         class="absolute block h-full object-cover w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                         alt="...">
@@ -54,12 +54,12 @@
     <section class="px-5" aria-label="Travel Detail">
         <div id="tourism-catalogue" class="flex flex-col mt-10">
             <h1 class="text-start text-2xl w-4/5 font-bold" aria-label="Catalogue Detail Title">{{ $data->title }}</h1>
-            <span class="text-sm font-light flex gap-1 items-center text-start w-4/5 mt-[10px]">
+            <span class="text-sm font-light flex gap-1 items-center text-start w-4/5 mt-[10px]" wire:ignore>
                 <ion-icon name="time-outline"></ion-icon><span>{{ $data->sub_title }}</span>
             </span>
 
             <!-- facilities -->
-            <div class="grid grid-cols-2 gap-y-5 text-xs text-slate-600 mt-7" aria-label="Facilities">
+            <div class="grid grid-cols-2 gap-y-5 text-sm text-slate-600 mt-7" aria-label="Facilities" wire:ignore>
                 @foreach ($facilities as $item)
                 <div class="flex items-center gap-2">
                     <ion-icon name="{{ $item->icon_name }}"></ion-icon><span>{{ $item->name }}</span>
@@ -77,12 +77,13 @@
                             <h2 class="text-xl font-bold">{{ $item['title'] }}</h2>
                             <div class="flex items-center gap-5">
                                 <div class="flex -space-x-4 rtl:space-x-reverse">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('/storage/images/hero/jogja-5.jpg')}}" alt="">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('/storage/images/hero/jogja-6.jpg')}}" alt="">
-                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('/storage/images/hero/jogja-7.jpg')}}" alt="">
-                                    <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">+5</a>
+                                    @foreach ($this->getDestinationMergeLimit($item['destinations']) as $destination)
+                                    <img class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="{{ asset('/storage/'.$destination)}}" alt="">
+                                    @endforeach
+                                    {{-- wire:click="showDestinationImages({{ json_encode($item['destinations']) }})"  --}}
+                                    <button wire:click="showDestinationImages({{ json_encode($item['destinations']) }})" class="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800">+{{ count($this->getDestinationMerge($item['destinations'])) }}</button>
                                 </div>
-                                <input id="checkbox" type="checkbox" value="{{ $item['title'] }}" wire:click="selectPaket('{{ $item['title'] }}')" class="w-6 h-6 cursor-pointer rounded-full bg-gray-100 border-gray-500 focus:ring-gray-800 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <input id="option{{ $item['title'] }}" wire:model.live="selectedPaket" type="checkbox" value="{{ $item['title'] }}" class="w-6 h-6 cursor-pointer rounded-full bg-gray-100 border-gray-500 focus:ring-gray-800 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             </div>
                         </div>
                         <div class="p-5">
@@ -115,49 +116,77 @@
 
     <!-- order -->
     <div class="mt-4 bg-slate-800 p-8 flex translate-y-12">
-        {{-- <a href="/tourism-catalogue"
-            class="mx-auto z-50 text-slate-800 bg-slate-100 text-sm font-semibold px-8 py-3 rounded-full focus:outline-none active:scale-95 transition-transform duration-150 ease-in-out">
+        <button type="button" wire:click='sendWhatsapp' class="mx-auto inline-flex items-center px-5 py-2.5 text-sm font-bold text-center text-slate-800 bg-slate-100 rounded-full hover:bg-slate-300 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             Order
-        </a> --}}
-        <button type="button" class="mx-auto inline-flex items-center px-5 py-2.5 text-sm font-bold text-center text-slate-800 bg-slate-100 rounded-full hover:bg-slate-300 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Order
+            @if (count($selectedPaket) > 0)
             <span class="inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-semibold text-slate-100 bg-slate-800 rounded-full">
-            2
+            {{ count($selectedPaket) }}
             </span>
-        </button>
+            @endif
+         </button>
+    </div>
+
+    <!-- Modal Structure -->
+    <div 
+        x-data="{ openModalGalery: false, category: 'all', showModal: false, selectedImage: null }"
+        x-init="openModalGalery = false;
+            $wire.on('showGaleryModal', () => {
+                openModalGalery = true;
+                category = 'all';
+            });
+        "
+        x-show="openModalGalery" 
+        @keydown.escape.window="openModalGalery = false"
+        x-bind:class="{ 'hidden' : !openModalGalery, 'fixed top-0 left-0 right-0 z-50 w-full h-full overflow-y-auto bg-gray-900 bg-opacity-50' : openModalGalery }" 
+        aria-modal="true" 
+        role="dialog">
+        <div class="flex items-center justify-center min-h-screen px-4">
+            <div class="relative w-full max-w-3xl py-6 px-4 bg-white rounded-lg shadow-lg">
+                <!-- Header -->
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-medium text-gray-900">Galery</h3>
+                    <button @click="openModalGalery = false, category = 'all'" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Content -->
+                <div class="mt-4 max-h-[calc(100vh-8rem)] overflow-y-auto scrollbar-simple">
+                    <div class="px-6">
+                        <div class="flex items-center justify-center py-2 md:py-8 flex-wrap">
+                            <button @click="category = 'all'" type="button" class="text-gray-900 border border-gray-100 hover:border-gray-300 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full text-xs font-medium px-5 py-2 text-center me-3 mb-3 dark:text-white dark:focus:ring-gray-800">All</button>
+                            @foreach ($destinationCategories as $category)
+                            <button @click="category = '{{ strtolower(str_replace(' ', '-', $category)) }}'" type="button" class="text-gray-900 border border-gray-100 hover:border-gray-300 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full text-xs font-medium px-5 py-2 text-center me-3 mb-3 dark:text-white dark:focus:ring-gray-800">{{ $category }}</button>
+                            @endforeach
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 py-4">
+                            @foreach ($destinationImages as $image)
+                            <div x-show="category === 'all' || category === '{{ $image['category'] }}'" 
+                                @click="selectedImage = '{{ asset('/storage/'.$image['image']) }}'; showModal = true;"
+                                class="overflow-auto cursor-pointer">
+                                <img class="h-auto max-w-full rounded-lg" src="{{ asset('/storage/'.$image['image']) }}" alt="">
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div x-show="showModal" 
+            x-transition.opacity 
+            class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+            @keydown.escape.window="showModal = false"
+            style="display: none;">
+        <div class="relative">
+            <img :src="selectedImage" :alt="selectedImage" class="max-w-full max-h-screen">
+            <button @click="showModal = false"
+                    class="absolute top-0 right-0 mt-4 mr-4 text-white text-sm bg-gray-900 rounded-full p-3">
+                &times;
+            </button>
+        </div>
+        </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const carouselElement = document.getElementById('indicators-carousel');
-      let startX = 0;
-      let endX = 0;
-  
-      // Detect when the user starts touching the screen
-      carouselElement.addEventListener('touchstart', function (e) {
-        startX = e.touches[0].clientX;
-      });
-  
-      // Detect when the user moves their finger
-      carouselElement.addEventListener('touchmove', function (e) {
-        endX = e.touches[0].clientX;
-      });
-  
-      // Detect when the user lifts their finger
-      carouselElement.addEventListener('touchend', function () {
-        const diffX = startX - endX;
-  
-        // If swipe is significant, navigate the carousel
-        if (Math.abs(diffX) > 50) {
-          if (diffX > 0) {
-            // Swipe left, show the next slide
-            document.querySelector('[data-carousel-next]').click();
-          } else {
-            // Swipe right, show the previous slide
-            document.querySelector('[data-carousel-prev]').click();
-          }
-        }
-      });
-    });
-</script>
