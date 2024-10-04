@@ -2,9 +2,10 @@
 
 namespace App\Livewire;
 
-use App\Models\Master\Destination;
-use App\Models\Master\Facility;
 use Livewire\Component;
+use App\Models\Master\Contact;
+use App\Models\Master\Facility;
+use App\Models\Master\Destination;
 use App\Models\Transaction\TravelCatalogue;
 
 class TourismCatalogueDetail extends Component
@@ -73,6 +74,14 @@ class TourismCatalogueDetail extends Component
         $this->isOpen = false;
     }
 
+    public function getFirstContactPersonAdmin()
+    {
+        $data = Contact::where('is_active', '=', true)
+                    ->where('is_contact_person', '=', true)
+                    ->first();
+        return $data;
+    }
+
     public function sendWhatsapp()
     {
         if (empty($this->selectedPaket)) 
@@ -81,11 +90,12 @@ class TourismCatalogueDetail extends Component
         }
         else 
         {
+            $phoneNumber = $this->getFirstContactPersonAdmin()->phone;
             $message = urlencode("Halo mimin Jogja Trip Travel, saya mau info lebih lanjut tentang paket ini:\n" 
                     ."\n*".$this->data->title."*\n"
                     .implode("\n", $this->selectedPaket)
                     ."\n\nTerima kasih mimin.");
-            $this->dispatch('open-link-tab', url: "https://wa.me/62859106849531?text=$message");
+            $this->dispatch('open-link-tab', url: "https://wa.me/62".$phoneNumber."?text=$message");
         }
     }
 

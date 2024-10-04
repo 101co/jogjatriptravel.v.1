@@ -5,10 +5,10 @@
             <!-- Carousel wrapper -->
             <div class="relative h-[344px] md:h-[425px] lg:h-[525px] overflow-hidden md:rounded-2xl">
                 <!-- Item 1 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                    <img src="{{ asset('/storage/images/hero/jogja-5.jpg')}}"
+                <div class="hidden duration-700 ease-in-out" data-carousel-item="">
+                    <img src="{{ asset('/storage/images/hero/jogjatriptravel1.jpg')}}"
                         class="absolute block object-cover w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                        alt="...">
+                        alt="Jogja Trip Travel Hero" loading="lazy">
                     <div class="absolute inset-0 flex flex-col items-center justify-center px-5 bg-black bg-opacity-50">
                         <h1 class="w-4/5 mx-auto leading-8 text-center text-slate-100 text-2xl lg:text-[44px] font-bold">Pilih Tema Wisatamu Sendiri</h1>
                         <p class="w-4/5 mx-auto mt-2 text-base leading-8 text-center text-slate-100 text-opacity-65 lg:mt-5">Temukan berbagai tema wisata sesuai dengan keinginan</p>
@@ -19,10 +19,10 @@
                     </div>
                 </div>
                 <!-- Item 2 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                    <img src="{{ asset('/storage/images/hero/jogja-6.jpg')}}"
+                <div class="hidden duration-700 ease-in-out" data-carousel-item="">
+                    <img src="{{ asset('/storage/images/hero/jogjatriptravel2.jpg')}}"
                         class="absolute block object-cover w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                        alt="...">
+                        alt="Jogja Trip Travel Hero" loading="lazy">
                     <div class="absolute inset-0 flex flex-col items-center justify-center px-5 bg-black bg-opacity-50">
                         <h1 class="w-4/5 mx-auto leading-8 text-center text-slate-100 text-2xl lg:text-[44px] font-bold">Jogja Trip Travel</h1>
                         <p class="w-3/4 mx-auto mt-2 text-base text-center leading-1 text-slate-100 text-opacity-65 lg:mt-5">Temukan informasi lebih lanjut tentang pilihan wisata dari Jogja Trip Travel</p>
@@ -33,10 +33,10 @@
                     </div>
                 </div>
                 <!-- Item 2 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                    <img src="{{ asset('/storage/images/hero/jogja-7.jpg')}}"
+                <div class="hidden duration-700 ease-in-out" data-carousel-item="">
+                    <img src="{{ asset('/storage/images/hero/jogjatriptravel3.jpg')}}"
                         class="absolute block object-cover w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                        alt="...">
+                        alt="Jogja Trip Travel Hero" loading="lazy">
                     <div class="absolute inset-0 flex flex-col items-center justify-center px-5 bg-black bg-opacity-50">
                         <h1 class="w-4/5 mx-auto leading-8 text-center text-slate-100 text-2xl lg:text-[44px] font-bold">Sosial Media Jogja Trip Travel</h1>
                         <p class="w-3/4 mx-auto mt-2 text-base text-center leading-1 text-slate-100 text-opacity-65 lg:mt-5">Intip berbagai keseruan wisata Jogja melalui akun sosial media kami</p>
@@ -97,7 +97,7 @@
                 <a href="{{ $item->slug }}" data-carousel-item="active">
                     <img src="{{ asset('/storage/'.$item->cover_images[0])}}"
                         class="absolute block object-cover w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                        alt="...">
+                        alt="Jogja Trip Travel" loading="lazy">
                     <div class="absolute inset-0 flex flex-col items-center justify-center px-5 bg-black bg-opacity-50">
                         <h1 class="mx-auto text-center text-slate-100 text-xl lg:text-[26px] font-bold">{{ $item->title }}</h1>
                     </div>
@@ -109,9 +109,9 @@
 
     {{-- second hero --}}
     <section aria-label="JogjaTripTravel Second Hero" class="relative h-[191px] md:h-[275px] lg:h-[375px] overflow-hidden mt-12 md:mt-14 lg:mt-24">
-        <img src="{{ asset('/storage/images/hero/jogja-10.jpg')}}"
+        <img src="{{ asset('/storage/images/hero/jogjatriptravel4.jpg')}}"
             class="absolute block object-cover w-full h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-            alt="...">
+            alt="Jogja Trip Travel" loading="lazy">
         <div class="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black bg-opacity-50 md:gap-5">
             <p
                 class="w-3/4 mx-auto font-light leading-1 text-center text-white opacity-95 text-opacity-65 text-2xl md:text-[30px]">
@@ -128,14 +128,16 @@
         <span class="text-base lg:text-xl font-light mx-auto text-center w-4/5 mt-[15px] lg:mt-[30px]">Contact our team for further
             information</span>
         <div class="mx-auto mt-[30px] lg:mt-[50px] flex gap-5">
-            <a href="#" aria-label="Contact JogjaTripTravel Admin 1"
+            @foreach ($this->getContactPersonAdmin() as $item)
+            <a target="_blank" href="https://wa.me/62{{ $item->phone }}?text=Halo Jogja Trip Travel, saya tertarik dengan paket wisata yang ditawarkan." aria-label="Contact JogjaTripTravel {{ $item->alias }}"
                 class="text-white bg-[#2E2E2E] text-base lg:text-lg font-semibold px-8 py-3 rounded-full focus:outline-none active:scale-95 transition-transform duration-150 ease-in-out">
-                Admin 1
+                {{ $item->alias }}
             </a>
-            <a href="#" aria-label="Contact JogjaTripTravel Admin 2"
+            @endforeach
+            {{-- <a href="#" aria-label="Contact JogjaTripTravel Admin 2"
                 class="text-white bg-[#2E2E2E] text-base lg:text-lg font-semibold px-8 py-3 rounded-full focus:outline-none active:scale-95 transition-transform duration-150 ease-in-out">
                 Admin 2
-            </a>
+            </a> --}}
         </div>
     </section>
 
@@ -150,7 +152,7 @@
                         class="flex items-center justify-between w-full gap-3 p-5 text-sm font-semibold text-gray-500 border border-b-0 border-gray-200 rtl:text-right rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
                         data-accordion-target="#accordion-collapse-body-1" aria-expanded="true"
                         aria-controls="accordion-collapse-body-1">
-                        <span>What is Jogja Trip Travel?</span>
+                        <span>Apa itu Jogja Trip Travel?</span>
                         <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -160,7 +162,7 @@
                 </h2>
                 <div id="accordion-collapse-body-1" class="hidden" aria-labelledby="accordion-collapse-heading-1">
                     <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                        <p class="mb-2 text-sm font-light text-gray-500 dark:text-gray-400">Jogja Trip Travel is a tourism service bureau domiciled in the city of Yogyakarta. Providing various tour packages that local and foreign tourists can choose from.</p>
+                        <p class="mb-2 text-sm font-light text-gray-500 dark:text-gray-400"><span class="font-bold">Jogja Trip Travel</span> adalah sebuah layanan atau platform yang menawarkan paket perjalanan dan wisata di Yogyakarta, Indonesia. Yogyakarta, atau sering disingkat Jogja, dikenal sebagai salah satu destinasi wisata utama di Indonesia, dengan banyak atraksi budaya, sejarah, dan alam yang menarik.</p>
                     </div>
                 </div>
                 <h2 id="accordion-collapse-heading-2">
@@ -168,7 +170,7 @@
                         class="flex items-center justify-between w-full gap-3 p-5 text-sm font-semibold text-gray-500 border border-b-0 border-gray-200 rtl:text-right focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
                         data-accordion-target="#accordion-collapse-body-2" aria-expanded="true"
                         aria-controls="accordion-collapse-body-1">
-                        <span>How to order toursim package?</span>
+                        <span>Paket wisata apa saja yang ditawarkan?</span>
                         <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -178,7 +180,7 @@
                 </h2>
                 <div id="accordion-collapse-body-2" class="hidden" aria-labelledby="accordion-collapse-heading-2">
                     <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                        <p class="mb-2 text-sm font-light text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem at perspiciatis in eligendi. Nam soluta veritatis accusantium rerum adipisci, inventore nostrum distinctio cupiditate laborum? Excepturi quibusdam magni quaerat minus placeat..</p>
+                        <p class="mb-2 text-sm font-light text-gray-500 dark:text-gray-400">Kami menyediakan berbagai pilihan paket wisata sesuai dengan tema wisata yang kamu inginkan. Untuk melihat info paket lebih lengkap kamu bisa klik menu <a href="#travel-catalogue" class="font-semibold">Catalogue</a> dan temukan berbagai informasi paket wisata sesuai keinginanmu.</p>
                     </div>
                 </div>
                 <h2 id="accordion-collapse-heading-3">
@@ -186,7 +188,7 @@
                         class="flex items-center justify-between w-full gap-3 p-5 text-sm font-semibold text-gray-500 border border-gray-200 rtl:text-right focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
                         data-accordion-target="#accordion-collapse-body-3" aria-expanded="false"
                         aria-controls="accordion-collapse-body-3">
-                        <span class="text-start">Can we make a Down Payment?</span>
+                        <span class="text-start">Bagaimana cara melakukan booking paket wisata?</span>
                         <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -196,7 +198,7 @@
                 </h2>
                 <div id="accordion-collapse-body-3" class="hidden" aria-labelledby="accordion-collapse-heading-3">
                     <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                        <p class="mb-2 text-sm font-light text-gray-500 dark:text-gray-400">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et, rerum alias velit minima tempora nostrum similique esse facilis explicabo provident ut exercitationem enim consectetur necessitatibus totam nulla quibusdam quam quasi!</p>
+                        <p class="mb-2 text-sm font-light text-gray-500 dark:text-gray-400">Untuk melakukan pemesanan paket wisata yang kamu inginkan, dapat dilakukan dengan cara menghubungi admin kami melalui menu <a href="#contact" class="font-semibold">Contact Us</a> atau melalui menu <a href="#travel-catalogue" class="font-semibold">Catalogue</a> dan pilih paket wisata yang kamu inginkan dengan klik tombol Order</p>
                     </div>
                 </div>
             </div>
