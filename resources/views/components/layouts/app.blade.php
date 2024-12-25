@@ -98,7 +98,7 @@
 
         {{-- start of button whatsapp --}}
         <div class="fixed bottom-0 right-0 mb-24 mr-6 md:mb-10 lg:mb-6">
-            <a href="https://wa.me/6281226075920?text=Halo Jogja Trip Travel, saya tertarik dengan paket wisata yang ditawarkan." target="_blank" aria-label="chat with jogjatriptravel admin">
+            <a href="https://wa.me/6282228800055?text=Halo Jogja Trip Travel, saya tertarik dengan paket wisata yang ditawarkan." target="_blank" aria-label="chat with jogjatriptravel admin">
                 <span class="flex p-4 text-2xl duration-500 rounded-full shadow-md cursor-pointer lg:text-3xl bg-slate-100 hover:scale-90 hover:bg-slate-300">
                     <ion-icon name="logo-whatsapp"></ion-icon>
                 </span>
