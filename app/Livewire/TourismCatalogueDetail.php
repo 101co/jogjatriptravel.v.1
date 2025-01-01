@@ -87,6 +87,7 @@ class TourismCatalogueDetail extends Component
         if (empty($this->selectedPaket)) 
         {
             $this->dispatch('show-swal', title: 'Paket belum dipilih', text: 'Pilih paket terlebih dahulu', icon: 'warning');
+            return "#";
         }
         else 
         {
@@ -95,7 +96,9 @@ class TourismCatalogueDetail extends Component
                     ."\n*".$this->data->title."*\n"
                     .implode("\n", $this->selectedPaket)
                     ."\n\nTerima kasih mimin.");
-            $this->dispatch('open-link-tab', url: "https://wa.me/62".$phoneNumber."?text=$message");
+                
+            return "https://wa.me/62".$phoneNumber."?text=$message";
+            // $this->dispatch('open-link-tab', url: "https://wa.me/62".$phoneNumber."?text=$message");
         }
     }
 

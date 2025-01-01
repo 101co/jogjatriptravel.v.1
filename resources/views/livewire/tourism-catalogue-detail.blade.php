@@ -116,14 +116,14 @@
 
     <!-- order -->
     <div class="flex p-8 mt-4 translate-y-12 bg-slate-800">
-        <button type="button" wire:click='sendWhatsapp' class="mx-auto inline-flex items-center px-5 py-2.5 text-sm font-bold text-center text-slate-800 bg-slate-100 rounded-full hover:bg-slate-300 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        <a type="button" href="{{ $this->sendWhatsapp() }}" class="mx-auto inline-flex items-center px-5 py-2.5 text-sm font-bold text-center text-slate-800 bg-slate-100 rounded-full hover:bg-slate-300 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             Order
             @if (count($selectedPaket) > 0)
             <span class="inline-flex items-center justify-center w-4 h-4 text-xs font-semibold rounded-full ms-2 text-slate-100 bg-slate-800">
             {{ count($selectedPaket) }}
             </span>
             @endif
-         </button>
+         </a>
     </div>
 
     <!-- Modal Structure -->
